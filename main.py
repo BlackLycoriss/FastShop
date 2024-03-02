@@ -7,18 +7,12 @@ app = FastAPI()
 def root():
     return FileResponse("index.html")
 
-@app.get("/index.html")
-def index_page():
-    return FileResponse("index.html")
+@app.get("/{item_name}")
+def page(item_name: str):
+    path = item_name
+    return FileResponse(path)
 
-@app.get("/about.html")
-def about_page():
-    return FileResponse("about.html")
-
-@app.get("/contacts.html")
-def contacts_page():
-    return FileResponse("contacts.html")
-
-@app.get("/catalog.html")
-def catalog_page():
-    return FileResponse("catalog.html")
+@app.get("/{root_src}/{item_name}")
+def source(root_src: str, item_name: str):
+    path = root_src + "/" + item_name
+    return FileResponse(path)
